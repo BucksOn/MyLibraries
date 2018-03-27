@@ -17,3 +17,9 @@ typedef struct __ST_POSITION__
 		_yPos = y;
 	}
 } stPos;
+
+typedef enum __E_DIRECTION__
+{
+	__E_LEFT__ = -1,
+	__E_RIGHT__ = 1,
+} eDir;
