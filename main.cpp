@@ -1,12 +1,11 @@
-#include "stdafx.h"
+#include "Library\stdafx.h"
 
 void main()
 {
 	CGraphicsManager _cGraphics;
 
-	_cGraphics.InitWindow(__D_SCREEN_WIDTH__, __D_SCREEN_HEIGHT__);
-
-	_cGraphics.LoopWindow();
+	if (_cGraphics.initWindow())
+		_cGraphics.LoopWindow();
 
 	_cGraphics.EndWIndow();
 }

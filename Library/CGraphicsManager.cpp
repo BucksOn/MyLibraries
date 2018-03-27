@@ -1,32 +1,19 @@
 #include "stdafx.h"
 
-void CGraphicsManager::InitWindow(const int& width, const int& height)
+bool CGraphicsManager::initWindow()
 {
-	if (!glfwInit()) Error("glfwInit");
+	if (!initGLFW()) return false;
 
-	_Window = glfwCreateWindow(width, height, "Game", NULL, NULL);
-	if (!_Window) Error("WindowInit");
+	windowSetting();
 
-	glfwMakeContextCurrent(_Window);
+	if (!createWindow()) return false;
+	
+	if (!initGLEW()) return false;
 
-	//!< Initialize GLEW
-	glewExperimental = true; // Needed for core profile
-	if (glewInit() != GLEW_OK) Error("glewInit");
+	glClearColor(1, 1, 1, 1);			 //!< while background
+	glfwSetInputMode(_Window, GLFW_STICKY_KEYS, GL_TRUE); //!< Set Keyboard Input
 
-	glViewport(0, 0, width, height);
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-
-	gluOrtho2D(0, width, 0, height);
-
-	//!< Use AlphaBlend (PNG)
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	srand(time(NULL));
-
-	_cManager.Init();
+	return true;
 }
 
 void CGraphicsManager::LoopWindow()
@@ -38,9 +25,6 @@ void CGraphicsManager::LoopWindow()
 		float currTime = (float)timeGetTime();
 		int	nFrame = 1000 / __D_FRAME_MAX__ - (currTime - _fTime);
 
-		glfwMakeContextCurrent(_Window);
-
-		glClearColor(1, 1, 1, 1);			 //!< while background
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		glMatrixMode(GL_MODELVIEW);
@@ -61,11 +45,52 @@ void CGraphicsManager::LoopWindow()
 void CGraphicsManager::EndWIndow()
 {
 	_cManager.Exit();
+	glfwTerminate();
 }
 
-void CGraphicsManager::Error(const std::string& error)
+bool CGraphicsManager::initGLFW()
 {
-	std::cout << error << std::endl;
+	if (!glfwInit())
+	{
+		fprintf(stderr, "Failed to initialize GLFW\n");
+		getchar();
+		return false;
+	}
 
-	exit(1);
+	return true;
+}
+
+void CGraphicsManager::windowSetting()
+{
+	glfwWindowHint(GLFW_SAMPLES, 4); //!< Anti-aliasing
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); //!< GL Version Setting _ max
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3); //!< GL Version Setting _ min
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+}
+
+
+bool CGraphicsManager::createWindow()
+{
+	_Window = glfwCreateWindow(__D_SCREEN_WIDTH__, __D_SCREEN_HEIGHT__, "GAME", NULL, NULL);
+	if (_Window == NULL) {
+		fprintf(stderr, "Do not Open GL Window\n");
+		getchar();
+		glfwTerminate();
+		return false;
+	}
+	return true;
+}
+
+bool CGraphicsManager::initGLEW()
+{
+	glfwMakeContextCurrent(_Window); //!< Initialize GLEW
+	glewExperimental = true; //!< Needed for core profile / CPU & GPU 
+	if (glewInit() != GLEW_OK) {
+		fprintf(stderr, "Failed to initialize GLEW\n");
+		getchar();
+		glfwTerminate();
+		return false;
+	}
+
+	return true;
 }

@@ -1,17 +1,23 @@
 #pragma once
-
+/* @ Graphics Manager
+   @ Initialize Window & Main Render _ Call Manager
+   @ Graphics Manager -> Manager(Object) -> Each Objects Draw */
 class CGraphicsManager
 {
-	float				_fTime;
+	GLFWwindow * _Window; //!< window
+	CManager	 _cManager; //!< object manager
 
-	GLFWwindow * _Window;
-	CManager	 _cManager;
+	float		_fTime; //!< frame time
 
+private:
+	bool initGLFW();
+	void windowSetting();
+	bool createWindow();
+	bool initGLEW();
 
-	void Error(const std::string& error);
 public:
+	bool initWindow();
 
-	void InitWindow(const int& width, const int& height);
 	void LoopWindow();
 	void EndWIndow();
 };
