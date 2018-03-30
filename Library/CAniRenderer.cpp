@@ -2,9 +2,6 @@
 
 void CAniRenderer::InitAnimation(const int& xpos, const int& ypos, const int& imagemax, const int& time)
 {
-	_stPos._xPos = xpos;
-	_stPos._yPos = ypos;
-
 	_nMax = imagemax;
 	_nAniTime = time;
 
@@ -24,8 +21,11 @@ void CAniRenderer::SetImage(const std::string& path, const int& width, const int
 	if (_Image == nullptr)
 		std::cout << path << " : do not find image file" << std::endl;
 	
-	_nWidth = width;
-	_nHeight = height;
+	_nWidth = _Image->width;
+	_nHeight = _Image->height;
+
+	_stCenterVertex._xPos = _nWidth / 2;
+	_stCenterVertex._yPos = _nHeight / 2;
 
 	_vAni.push_back(_Image);
 }

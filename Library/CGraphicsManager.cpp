@@ -13,6 +13,8 @@ bool CGraphicsManager::initWindow()
 	glClearColor(1, 1, 1, 1);			 //!< while background
 	glfwSetInputMode(_Window, GLFW_STICKY_KEYS, GL_TRUE); //!< Set Keyboard Input
 
+	_cManager.Init();
+
 	return true;
 }
 

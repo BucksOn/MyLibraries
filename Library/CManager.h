@@ -2,6 +2,7 @@
 
 class CManager
 {
+	CTemp _cTemp;
 
 public:
 	//!< Public Call

@@ -13,7 +13,7 @@ class CAniRenderer : public CImageRenderer
 public:
 	
 	void InitAnimation(const int& xpos, const int& ypos, const int& imagemax, const int& time);
-	void SetImage(const std::string& path, const int& width, const int& height);
+	virtual void SetImage(const std::string& path, const int& width, const int& height);
 
 	virtual void Draw();
 	virtual void Exit();

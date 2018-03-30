@@ -12,6 +12,9 @@ void CImageRenderer::SetImage(const std::string& path, const int& xpos, const in
 	_nWidth = width;
 	_nHeight = height;
 
+	_stCenterVertex._xPos = _nWidth / 2;
+	_stCenterVertex._yPos = _nHeight / 2;
+
 	_nDir = __E_RIGHT__;
 }
 

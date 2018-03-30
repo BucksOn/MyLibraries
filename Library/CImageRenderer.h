@@ -16,11 +16,11 @@ protected:
 	int				_nDir;
 
 	stPos			_stPos;
-
+	stPos			_stCenterVertex;
 public:
 
 	//!< public Call
-	void SetImage(const std::string& path, const int& xpos, const int& ypos, const int& width, const int& height);
+	virtual void SetImage(const std::string& path, const int& xpos, const int& ypos, const int& width, const int& height);
 	virtual void Draw();
 	virtual void Exit();
 

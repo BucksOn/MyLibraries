@@ -6,7 +6,8 @@
 
 #include "GL\glew.h"
 #include "GLFW\glfw3.h"
-#include "GL\glut.h"
+#include "GL\freeglut.h"
+//#include "GL\glut.h"
 #include "opencv\highgui.h"
 #include "opencv2\opencv.hpp"
 
@@ -14,6 +15,9 @@
 
 #include "CImageRenderer.h"
 #include "CAniRenderer.h"
+
+#include "CObject.h"
+#include "..\CTemp.h"
 
 #include "CManager.h"
 #include "CGraphicsManager.h"
