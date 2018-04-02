@@ -1,0 +1,6 @@
+*.idb
+*.tlog
+*.lastbuildstate
+*.png
+*.filters
+*.vcxproj

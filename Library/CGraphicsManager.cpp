@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-bool CGraphicsManager::initWindow()
+bool CGraphicsManager::initWindow() 
 {
 	if (!initGLFW()) return false;
 
